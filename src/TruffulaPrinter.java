@@ -12,7 +12,7 @@ public class TruffulaPrinter {
   );
 
   public TruffulaPrinter(TruffulaOptions options) {
-    this(options, System.out);
+    this(options, System.out, DEFAULT_COLOR_SEQUENCE);
   }
 
   public TruffulaPrinter(TruffulaOptions options, List<ConsoleColor> colorSequence) {

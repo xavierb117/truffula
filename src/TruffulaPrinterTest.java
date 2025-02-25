@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TruffulaPrinterTest {
 
     @Test
-    public void testPrintTree_ExactOutput(@TempDir File tempDir) throws IOException {
+    public void testPrintTree_ExactOutput_WithCustomPrintStream(@TempDir File tempDir) throws IOException {
         // Build the example directory structure:
         // myFolder/
         //    .hidden.txt
@@ -26,7 +26,6 @@ public class TruffulaPrinterTest {
         //       notes.txt
         //       README.md
         //    zebra.txt
-        // Hidden files (e.g. ".hidden.txt") will be created but should not appear in output.
 
         // Create "myFolder"
         File myFolder = new File(tempDir, "myFolder");
@@ -67,26 +66,23 @@ public class TruffulaPrinterTest {
         dog.createNewFile();
 
         // Set up TruffulaOptions with showHidden = false and useColor = true
-        // (Assuming TruffulaOptions(File, boolean, boolean) constructor exists)
         TruffulaOptions options = new TruffulaOptions(myFolder, false, true);
 
-        // Instantiate TruffulaPrinter with default color sequence
-        TruffulaPrinter printer = new TruffulaPrinter(options);
-
-        // Capture output from printTree()
+        // Capture output using a custom PrintStream
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(baos));
+        PrintStream printStream = new PrintStream(baos);
 
+        // Instantiate TruffulaPrinter with custom PrintStream
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+
+        // Call printTree (output goes to printStream)
         printer.printTree();
 
-        System.out.flush();
-        System.setOut(originalOut);
-
+        // Retrieve printed output
         String output = baos.toString();
         String nl = System.lineSeparator();
 
-        // Build expected output (exactly as specified)
+        // Build expected output with exact colors and indentation
         String reset = "\033[0m";
         String white = "\033[0;37m";
         String purple = "\033[0;35m";
@@ -105,7 +101,7 @@ public class TruffulaPrinterTest {
         expected.append(yellow).append("      notes.txt").append(reset).append(nl);
         expected.append(purple).append("   zebra.txt").append(reset).append(nl);
 
-        // Assert that the output from printTree() matches exactly the expected output
+        // Assert that the output matches the expected output exactly
         assertEquals(expected.toString(), output);
     }
 }
