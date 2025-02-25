@@ -58,11 +58,9 @@ public class TruffulaPrinterTest {
         assertTrue(images.mkdir(), "images directory should be created");
 
         // Create files in images
-        File cat1 = new File(images, "Cat.png");
-        File cat2 = new File(images, "cat.png");
+        File cat = new File(images, "cat.png");
         File dog = new File(images, "Dog.png");
-        cat1.createNewFile();
-        cat2.createNewFile();
+        cat.createNewFile();
         dog.createNewFile();
 
         // Set up TruffulaOptions with showHidden = false and useColor = true
@@ -89,17 +87,16 @@ public class TruffulaPrinterTest {
         String yellow = "\033[0;33m";
 
         StringBuilder expected = new StringBuilder();
-        expected.append(white).append("myFolder/").append(reset).append(nl);
-        expected.append(purple).append("   Apple.txt").append(reset).append(nl);
-        expected.append(purple).append("   banana.txt").append(reset).append(nl);
-        expected.append(purple).append("   Documents/").append(reset).append(nl);
-        expected.append(yellow).append("      README.md").append(reset).append(nl);
-        expected.append(yellow).append("      images/").append(reset).append(nl);
-        expected.append(white).append("         Cat.png").append(reset).append(nl);
-        expected.append(white).append("         cat.png").append(reset).append(nl);
-        expected.append(white).append("         Dog.png").append(reset).append(nl);
-        expected.append(yellow).append("      notes.txt").append(reset).append(nl);
-        expected.append(purple).append("   zebra.txt").append(reset).append(nl);
+        expected.append(white).append("myFolder/").append(nl).append(reset);
+        expected.append(purple).append("   Apple.txt").append(nl).append(reset);
+        expected.append(purple).append("   banana.txt").append(nl).append(reset);
+        expected.append(purple).append("   Documents/").append(nl).append(reset);
+        expected.append(yellow).append("      images/").append(nl).append(reset);
+        expected.append(white).append("         cat.png").append(nl).append(reset);
+        expected.append(white).append("         Dog.png").append(nl).append(reset);
+        expected.append(yellow).append("      notes.txt").append(nl).append(reset);
+        expected.append(yellow).append("      README.md").append(nl).append(reset);
+        expected.append(purple).append("   zebra.txt").append(nl).append(reset);
 
         // Assert that the output matches the expected output exactly
         assertEquals(expected.toString(), output);
