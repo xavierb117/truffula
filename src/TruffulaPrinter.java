@@ -6,14 +6,21 @@ public class TruffulaPrinter {
   private List<ConsoleColor> colorSequence;
   private ColorPrinter out;
 
+  // Default Color Sequence
+  private static final List<ConsoleColor> DEFAULT_COLOR_SEQUENCE = List.of(
+      ConsoleColor.WHITE, ConsoleColor.PURPLE, ConsoleColor.YELLOW
+  );
 
   public TruffulaPrinter(TruffulaOptions options) {
     this(options, System.out);
   }
 
+  public TruffulaPrinter(TruffulaOptions options, List<ConsoleColor> colorSequence) {
+    this(options, System.out, colorSequence);
+  }
+
   public TruffulaPrinter(TruffulaOptions options, PrintStream outStream) {
-    var colorSequence = List.of(ConsoleColor.WHITE, ConsoleColor.PURPLE, ConsoleColor.YELLOW);
-    this(options, outStream, colorSequence);
+    this(options, outStream, DEFAULT_COLOR_SEQUENCE);
   }
 
   public TruffulaPrinter(TruffulaOptions options, PrintStream outStream, List<ConsoleColor> colorSequence) {
