@@ -21,7 +21,7 @@ class ColorPrinterTest {
     printer.println(message);
 
 
-    String expectedOutput = "\\033[0;31mI speak for the trees\\033[0m\n";
+    String expectedOutput = ConsoleColor.RED + "I speak for the trees\n" + ConsoleColor.RESET;
 
     // Assert: Verify the printed output
     assertEquals(expectedOutput, outputStream.toString());
