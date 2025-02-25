@@ -1,17 +1,25 @@
+import java.io.PrintStream;
 import java.util.List;
 
 public class TruffulaPrinter {
   private TruffulaOptions options;
   private List<ConsoleColor> colorSequence;
+  private ColorPrinter out;
+
 
   public TruffulaPrinter(TruffulaOptions options) {
-    var colorSequence = List.of(ConsoleColor.WHITE, ConsoleColor.PURPLE, ConsoleColor.YELLOW);
-    this(options, colorSequence);
+    this(options, System.out);
   }
 
-  public TruffulaPrinter(TruffulaOptions options, List<ConsoleColor> colorSequence) {
+  public TruffulaPrinter(TruffulaOptions options, PrintStream outStream) {
+    var colorSequence = List.of(ConsoleColor.WHITE, ConsoleColor.PURPLE, ConsoleColor.YELLOW);
+    this(options, outStream, colorSequence);
+  }
+
+  public TruffulaPrinter(TruffulaOptions options, PrintStream outStream, List<ConsoleColor> colorSequence) {
     this.options = options;
     this.colorSequence = colorSequence;
+    out = new ColorPrinter(outStream);
   }
 
   /**
@@ -31,12 +39,12 @@ public class TruffulaPrinter {
    *    Apple.txt
    *    banana.txt
    *    Documents/
-   *       README.md
    *       images/
    *          Cat.png
    *          cat.png
    *          Dog.png
    *       notes.txt
+   *       README.md
    *    zebra.txt
    *
    */
