@@ -35,7 +35,7 @@ public class ColorPrinter {
   }
 
   public ColorPrinter(PrintStream printStream) {
-    this(printStream, ConsoleColor.BLACK);
+    this(printStream, ConsoleColor.WHITE);
   }
 
   public ColorPrinter(PrintStream printStream, ConsoleColor color) {

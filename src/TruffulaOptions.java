@@ -24,6 +24,7 @@ public class TruffulaOptions  {
   // Structure [-h] [-nc] path
   // -h show hidden files (defaults to false)
   // -nc do not use color (uses color by default)
+  // If color is not used then all text is white
   // Throws IllegalArgumentException if unkown arguments or missing filepath
   // Throws FileNotFoundException if the directory cannot be found or if the path points to a file
   // Examples:
