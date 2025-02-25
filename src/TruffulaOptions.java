@@ -25,10 +25,10 @@ public class TruffulaOptions  {
   // -h show hidden files (defaults to false)
   // -nc do not use color (uses color by default)
   // Throws IllegalArgumentException if unkown arguments or missing filepath
-  // Throws FileNotFoundException
+  // Throws FileNotFoundException if the directory cannot be found or if the path points to a file
   // Examples:
-  // ['-nc', '-h' '/path/to/file'] don't use color, do show hidden files
-  // ['-h', '-nc' '/path/to/file'] don't use color, do show hidden files (order of flags unimportant)
+  // ['-nc', '-h' '/path/to/directory'] don't use color, do show hidden files
+  // ['-h', '-nc' '/path/to/directory'] don't use color, do show hidden files (order of flags unimportant)
   // ['/path/to/file'] use color, don't show hidden files
   public TruffulaOptions (String[] args) throws IllegalArgumentException, FileNotFoundException  {
     // TODO: Replace the below lines with your implementation

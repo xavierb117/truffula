@@ -16,7 +16,7 @@ public class ColorPrinter {
     this.currentColor = color;
   }
 
-  // Sets the terminal's color to currentColor, prints the message followed by a newline, then resets the color
+  // Sets the terminal's color to currentColor, prints the message, resets the color, then has a new line
   public void println(String message) {
     println(message, true);
   }
