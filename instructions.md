@@ -58,7 +58,33 @@ You will need to do a number of things to make it work.
 You do not need to handle invalid command line arguments at this point (that is an extra credit wave).
 
 ## Wave 4: Initial TruffulaPrinter
-In this wave you will make it so the TruffulaPrint can print a directory tree. For this wave do not worry about colors or alphabetization. The given test will NOT yet pass because of the lack of color or alphabetical order, I STRONGLY recommend making a simpler test that does not require these to be implemented first. Look at the exisiting test to understand how to make a test.
+In this wave you will make it so the TruffulaPrint can print a directory tree with `printTree()`. For this wave do not worry about colors or alphabetization. The given test will NOT yet pass because of the lack of color or alphabetical order, I STRONGLY recommend making a simpler test that does not require these to be implemented first. Look at the exisiting test to understand how to make a test.
+
+Look closely at the Javdoc to understand how the output should be structured.
 
 Hints:
-- You will find the following methods helpful: 
+- You will find the following methods helpful: TODO(auberon)
+- Add a recursive helper method
+- Make a simpler test that does not test order or color
+- Consider testing it through your main.
+- DO NOT USE SYSTEM.OUT.PRINTLN
+- USE out.println instead (will use your ColorPrinter)
+
+YOU MUST ALSO ADD UNIT TESTS!!! Look at the existing test to understand how it uses a temp directory for testing.
+
+## Wave 5: Hidden files
+Update your `printTree()` implementation so it respects the option of whether or not to show hidden files/folders.
+
+YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test colors or alphabetical order.
+
+## Wave 5: Colors!
+Update your `printTree()` implementation so it cycles through colors according to the default color scheme. The root folder should be white, its direct children should be purple, their children should be yellow, their children should be white again, and so on.
+
+YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test alphabetical order.
+
+## Wave 6: Alphabetization
+Update your `printTree()` so that the files/folders are sorted alphabetically. Use the provided `AlphabeticalFileSorter.java` for help with this. Note with curiosity how it's working with lambdas, but you do not need to edit or fully understand `AlphabeticalFileSorter.java`
+
+It should now finally pass the provided test! Congrats!
+
+There is one more small wave that will be added in a future class~
