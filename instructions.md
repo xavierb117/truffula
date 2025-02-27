@@ -47,8 +47,9 @@ java src/App.java -nc -h src
 
 If it is working properly, it should print:
 ```
-TODO(auberon): Sample output here
+printTree was called!
 ```
+And display the options beneath it.
 
 You will need to do a number of things to make it work.
 1. Create a new TruffulaOptions by passing it `args`
