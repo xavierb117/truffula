@@ -63,7 +63,7 @@ In this wave you will make it so the TruffulaPrint can print a directory tree wi
 Look closely at the Javdoc to understand how the output should be structured.
 
 Hints:
-- You will find the following methods helpful: TODO(auberon)
+- You will find the following java.io.File methods helpful: `.getName()` `.isDirectory()` and `listFiles()`
 - Add a recursive helper method
 - Make a simpler test that does not test order or color
 - Consider testing it through your main.
@@ -73,7 +73,7 @@ Hints:
 YOU MUST ALSO ADD UNIT TESTS!!! Look at the existing test to understand how it uses a temp directory for testing.
 
 ## Wave 5: Hidden files
-Update your `printTree()` implementation so it respects the option of whether or not to show hidden files/folders.
+Update your `printTree()` implementation so it respects the option of whether or not to show hidden files/folders. You will find `isHidden()` helpful.
 
 YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test colors or alphabetical order.
 
