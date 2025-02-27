@@ -56,6 +56,14 @@ public class TruffulaPrinter {
    *
    */
   public void printTree() {
+    // TODO: Implement this!
+    // REQUIRED: ONLY use java.io, DO NOT use java.nio
+    
+    // Hints:
+    // - Add a recursive helper method
+    // - Use AlphabeticalFileSorter
 
+    System.out.println("printTree was called!");
+    System.out.println("My options are: " + options);
   }
 }

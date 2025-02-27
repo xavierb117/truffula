@@ -71,6 +71,11 @@ public class TruffulaOptions  {
     return showHidden;
   }
 
+  @Override
+  public String toString() {
+    return "TruffulaOptions [root=" + root + ", showHidden=" + showHidden + ", useColor=" + useColor + "]";
+  }
+
   /**
    * Indicates whether color should be used when printing the directory tree.
    * 
