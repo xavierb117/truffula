@@ -89,7 +89,7 @@ Update your `printTree()` so that the files/folders are sorted alphabetically. U
 It should now finally pass the provided test! Congrats!
 
 ## Wave 7: Creating a command line utility
-In this wave we will make it so that you can call truffula from the command line. We will do it in two steps, first creating an executable JAR file, then adding it to our PATH. There are a lot of steps to this wave, but don't worry, it's all just copying commands.
+In this wave we will make it so that you can call truffula from the command line. We will do it in two steps, first creating an executable JAR file, then adding it to our PATH. There are a lot of steps to this wave, but don't worry, it's all just copying commands. Have EVERY PARTNER run all these commands. You will not need to commit anything from this wave.
 
 ### Creating an executable JAR
 JAR is short for "Java Archive". It's a collection of our compiled code that we can share with others. You may have noticed in the lub folder that there is a JAR for JUnit. This is how we've been able to use all of the JUnit functionality.
