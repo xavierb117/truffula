@@ -102,4 +102,62 @@ javac -d target src/App.java src/ColorPrinter.java src/ConsoleColor.java src/Tru
 
 This places the compiled files in a new directory called `target`. You should see `target` directory be created with a bunch of `.class` files. `.class` files are compiled Java files. The `-d target` is responsible for specifying the name of the directory where you want the compiled files.
 
-Next, create the jar
+Next, create the jar.
+
+```
+jar cfe target/truffula.jar App -C target .
+```
+
+This should create a new file `truffula.jar` in the `target` directory.
+
+Here's how it works:
+- `jar`: The command to create JARs. This was installed when you installed the Java JDK
+- `c`: Create a new jar
+- `f` and `target/truffula.jar`: Specify that the name of the file should be `truffula.jar` and that it should be in the `target` directory.
+- `e` and `App`: Specify that the `App` class has the `main` method to be executed.
+- `-C target .`: Specify that the `.class` files are in the `target` directory.
+
+### Validating the JAR
+
+Try running your jar! Use the following command:
+
+```
+java -jar target/truffula.jar -h .
+```
+
+You should see it print a lot! It'll be both the normal files and the hidden `.git` directory. Try experimenting with the -nc and -h flags. Try running it on different directories too!
+
+### Placing the JAR on the path (Mac)
+These steps are for Mac computers. Please skip to the Windows section if on Windows.
+
+1. Copy your jar to the `bin` directory:
+   ```
+   sudo cp target/truffula.jar /usr/local/bin/truffula.jar
+   ```
+   You may be asked for your password. This is the password to your computer. Type it in if prompted and then hit enter. You will not see the letters showing up but that's OK. It's to prevent people from seeing your password over your shoulder.
+1. Create a new shell script using `vim`. Run the below command to open `vim` and create a new file named `truffula` in your `bin` directory:
+   ```
+   sudo vim /usr/local/bin/truffula
+   ```
+   You may or may not be asked again for your password.
+1. Press `i` to enter insert mode in vim. You should see the word `INSERT` show up at the bottom of the terminal.
+1. Copy the following contents to the new `truffula` file
+   ```
+   #!/bin/bash
+   java -jar "/usr/local/bin/truffula.jar" "$@"
+   ```
+   The first line tells the computer that the file should be executed using the Bash shell. The second line describes a command to run the `truffula.jar`. The `@` says to pass along any command line flags. We do this so you can just type `truffula` instead of the whole `java -jar` command.
+1. Exit insert mode by pressing the Escape (esc) key.
+1. Exit vim and save the file by typing `:wq` then  hitting enter. `w` is for "write" (save the file). `q` is for quit.
+1. Make the `truffula` file executable:
+   ```
+   sudo chmod +x /usr/local/bin/truffula
+   ```
+   You may or may not be asked for your password. `chmod` stands for "change mode" and it allows you to change the permissions of a file or directory. The `+x` adds the permission to run the file as an executable.
+1. Open a new terminal window in your home directory `~`. (This is where it opens by default.) Try running the `truffula` command!
+   ```
+   truffula ~
+   ```
+   This should show the entire contents of your home directory. It will be huge! You may get a pop-up asking for permission to open other files. Say yes. Congrats! You've made a real command line utility! Feel free to use it your day-to-day work. Congratulate your partner and take a well-deserved break.
+
+### Placing the JAR on the path (Windows)
