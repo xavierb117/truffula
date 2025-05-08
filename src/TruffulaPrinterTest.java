@@ -5,11 +5,60 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TruffulaPrinterTest {
+
+    /**
+     * Checks if the current operating system is Windows.
+     *
+     * This method reads the "os.name" system property and checks whether it
+     * contains the substring "win", which indicates a Windows-based OS.
+     * 
+     * You do not need to modify this method.
+     *
+     * @return true if the OS is Windows, false otherwise
+     */
+    private static boolean isWindows() {
+        String os = System.getProperty("os.name").toLowerCase();
+        return os.contains("win");
+    }
+
+    /**
+     * Creates a hidden file in the specified parent folder.
+     * 
+     * The filename MUST start with a dot (.).
+     *
+     * On Unix-like systems, files prefixed with a dot (.) are treated as hidden.
+     * On Windows, this method also sets the DOS "hidden" file attribute.
+     * 
+     * You do not need to modify this method, but you SHOULD use it when creating hidden files
+     * for your tests. This will make sure that your tests work on both Windows and UNIX-like systems.
+     *
+     * @param parentFolder the directory in which to create the hidden file
+     * @param filename the name of the hidden file; must start with a dot (.)
+     * @return a File object representing the created hidden file
+     * @throws IOException if an I/O error occurs during file creation or attribute setting
+     * @throws IllegalArgumentException if the filename does not start with a dot (.)
+     */
+    private static File createHiddenFile(File parentFolder, String filename) throws IOException {
+        if(!filename.startsWith(".")) {
+            throw new IllegalArgumentException("Hidden files/folders must start with a '.'");
+        }
+        File hidden = new File(parentFolder, filename);
+        hidden.createNewFile();
+        if(isWindows()) {
+            Path path = Paths.get(hidden.toURI());
+            Files.setAttribute(path, "dos:hidden", Boolean.TRUE, LinkOption.NOFOLLOW_LINKS);
+        }
+        return hidden;
+    }
 
     @Test
     public void testPrintTree_ExactOutput_WithCustomPrintStream(@TempDir File tempDir) throws IOException {
@@ -40,8 +89,7 @@ public class TruffulaPrinterTest {
         zebra.createNewFile();
 
         // Create a hidden file in myFolder
-        File hidden = new File(myFolder, ".hidden.txt");
-        hidden.createNewFile();
+        createHiddenFile(myFolder, ".hidden.txt");
 
         // Create subdirectory "Documents" in myFolder
         File documents = new File(myFolder, "Documents");
@@ -81,10 +129,10 @@ public class TruffulaPrinterTest {
         String nl = System.lineSeparator();
 
         // Build expected output with exact colors and indentation
-        String reset = "\033[0m";
-        String white = "\033[0;37m";
-        String purple = "\033[0;35m";
-        String yellow = "\033[0;33m";
+        ConsoleColor reset = ConsoleColor.RESET;
+        ConsoleColor white = ConsoleColor.WHITE;
+        ConsoleColor purple = ConsoleColor.PURPLE;
+        ConsoleColor yellow = ConsoleColor.YELLOW;
 
         StringBuilder expected = new StringBuilder();
         expected.append(white).append("myFolder/").append(nl).append(reset);

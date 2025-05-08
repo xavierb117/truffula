@@ -74,9 +74,9 @@ Hints:
 YOU MUST ALSO ADD UNIT TESTS!!! Look at the existing test to understand how it uses a temp directory for testing.
 
 ## Wave 5: Hidden files
-Update your `printTree()` implementation so it respects the option of whether or not to show hidden files/folders. You will find `isHidden()` helpful.
+Update your `printTree()` implementation so it respects the option of whether or not to show hidden files/folders. Use `isHidden()` to check this!
 
-YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test colors or alphabetical order.
+YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test colors or alphabetical order. When making unit tests to handle hidden files, make sure to use the `createHiddenFile` method in `TruffulaPrinterTest` 
 
 ## Wave 5: Colors!
 Update your `printTree()` implementation so it cycles through colors according to the default color scheme. The root folder should be white, its direct children should be purple, their children should be yellow, their children should be white again, and so on.
