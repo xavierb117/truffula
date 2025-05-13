@@ -4,6 +4,11 @@ The provided tests are VERY MINIMAL. You are expected to be adding thorough test
 
 You must NOT use the `java.nio` package for any wave! You can only use `java.io`.
 
+## Wave 0: Understand
+In this wave you will be working to undertsand the files that are provided for you. Open `notes.md` to see a list of the files in the order I recommend you look at them. For each file, write notes in `notes.md` summarizing your understanding and putting down any questions you want to better understand later. This will take a long time, but it is worth it! Do not skimp on this part, you will regret it! A very large part of this project is understanding the OOP structure.
+
+Make frequent commits to your `notes.md` as you learn.
+
 ## Wave 1: Color Printer
 In this wave you will implement a class that can print text to the console in color. To achieve this you implement `print(String message, boolean reset)` in `ColorPrinter.java`. You do not need to alter the other methods.
 Hints:
@@ -92,7 +97,7 @@ It should now finally pass the provided test! Congrats!
 In this wave we will make it so that you can call truffula from the command line. We will do it in two steps, first creating an executable JAR file, then adding it to our PATH. There are a lot of steps to this wave, but don't worry, it's all just copying commands. Have EVERY PARTNER run all these commands. You will not need to commit anything from this wave.
 
 ### Creating an executable JAR
-JAR is short for "Java Archive". It's a collection of our compiled code that we can share with others. You may have noticed in the lub folder that there is a JAR for JUnit. This is how we've been able to use all of the JUnit functionality.
+JAR is short for "Java Archive". It's a collection of our compiled code that we can share with others. You may have noticed in the lib folder that there is a JAR for JUnit. This is how we've been able to use all of the JUnit functionality.
 
 Make sure you are in the root of the repository, then compile your code:
 
