@@ -19,6 +19,9 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 - Colors will be managed by ConsoleColor
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
+TruffulaOptions:
+
+TruffulaOptionsTest:
 
 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
