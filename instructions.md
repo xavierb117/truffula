@@ -78,17 +78,17 @@ Update your `printTree()` implementation so it respects the option of whether or
 
 YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test colors or alphabetical order. When making unit tests to handle hidden files, make sure to use the `createHiddenFile` method in `TruffulaPrinterTest` 
 
-## Wave 5: Colors!
+## Wave 6: Colors!
 Update your `printTree()` implementation so it cycles through colors according to the default color scheme. The root folder should be white, its direct children should be purple, their children should be yellow, their children should be white again, and so on.
 
 YOU MUST ALSO ADD UNIT TESTS!!! Make a test that tests color but does not test alphabetical order.
 
-## Wave 6: Alphabetization
+## Wave 7: Alphabetization
 Update your `printTree()` so that the files/folders are sorted alphabetically. Use the provided `AlphabeticalFileSorter.java` for help with this. Note with curiosity how it's working with lambdas, but you do not need to edit or fully understand `AlphabeticalFileSorter.java`
 
 It should now finally pass the provided test! Congrats!
 
-## Wave 7: Creating a command line utility
+## Wave 8: Creating a command line utility
 In this wave we will make it so that you can call truffula from the command line. We will do it in two steps, first creating an executable JAR file, then adding it to our PATH. There are a lot of steps to this wave, but don't worry, it's all just copying commands. Have EVERY PARTNER run all these commands. You will not need to commit anything from this wave.
 
 ### Creating an executable JAR
