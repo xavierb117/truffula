@@ -4,6 +4,9 @@ As part of Wave 0, please fill out notes for each of the below files. They are i
 PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## App.java
+- This is the application for printing a directory tree, must be done manually
+- There are options to show hidden files that start with a dot, and handle colored output
+- OOP Heavy, create TruffulaOptions using args and pass it to TruffulaPrinter
 
 ## ConsoleColor.java
 
