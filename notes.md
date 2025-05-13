@@ -17,10 +17,14 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
+
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
 TrufullaPrinter:
     - Prints out the directory and optional colors if selected/inputted
     - Same methods with different signature/parameters; Whichever argument is selected is the method that will be used
+TrufullaPrinterTest:
+    - Checks the os system and creates a hidden file in a specified folder (file name must start with . which indicates it is a hidden folder)
+    - This test will let us know if the program works correctly
 
 ## AlphabeticalFileSorter.java
 - Looks over the files, grabs two at a time and compares sorts them alphabetically, then repeats for the entire file directory you're in. 
