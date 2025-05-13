@@ -14,3 +14,6 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
 
 ## AlphabeticalFileSorter.java
+- Looks over the files, grabs two at a time and compares sorts them alphabetically, then repeats for the entire file directory you're in. 
+    - What happens to the method if there's only one file in the directory?
+    
