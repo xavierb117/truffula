@@ -9,6 +9,9 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 - OOP Heavy, create TruffulaOptions using args and pass it to TruffulaPrinter
 
 ## ConsoleColor.java
+- This is an Enum representing ANSI escape codes for colored output
+- Used to format console output by applying colors to texts
+- Makes use of Enum, which will be researched in order to solve
 
 ## ColorPrinter.java / ColorPrinterTest.java
 
