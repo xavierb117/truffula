@@ -14,6 +14,9 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 - Makes use of Enum, which will be researched in order to solve
 
 ## ColorPrinter.java / ColorPrinterTest.java
+- Printer helps print colored text to a PrintStream. Tests help test for the color of the text
+- Printer should apply specified colors in terminal. Tests must be written manually
+- Colors will be managed by ConsoleColor
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 
