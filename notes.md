@@ -20,7 +20,9 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 
 ## TruffulaOptions.java / TruffulaOptionsTest.java
 TruffulaOptions:
-
+    - Represents the configuration options for controlling how a directory tree is displayed, including hidden files and colored output
+    - Includes the root directory from which to begin printing the tree
+    - -h and -nc are the flags to determine display, path is mandatory
 TruffulaOptionsTest:
 
 
