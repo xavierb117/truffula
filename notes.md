@@ -22,6 +22,8 @@ PLEASE MAKE FREQUENT COMMITS AS YOU FILL OUT THIS FILE.
 TruffulaOptions:
 
 TruffulaOptionsTest:
+    - We test to see if the directory we're calling Truffula in is a working directory or if there is an error such as
+    corruption, no network detected, etc.
 
 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
