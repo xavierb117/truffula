@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.PrintStream;
 
 /**
@@ -87,6 +88,14 @@ public class ColorPrinter {
    */
   public void print(String message, boolean reset) {
     // TODO: Implement this!
+    
+    if (reset == true) {
+      // setCurrentColor(ConsoleColor.RESET);
+        printStream.print(getCurrentColor() + message + ConsoleColor.RESET);
+    } 
+    if (reset == false) {
+        printStream.print(getCurrentColor() + message);
+    }
   }
 
   /**
