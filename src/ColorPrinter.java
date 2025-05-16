@@ -19,6 +19,12 @@ import java.io.PrintStream;
  * The printed text will appear in the terminal with the specified colors if the terminal supports ANSI codes.
  */
 public class ColorPrinter {
+  public static void main (String[] args) {
+    ColorPrinter printer = new ColorPrinter(System.out, ConsoleColor.RED);
+    // printer.setCurrentColor(ConsoleColor.RED);
+    printer.println("This is red text");
+    printer.println("Now the message is white");
+}
   /**
    * The current color used for printing.
    */

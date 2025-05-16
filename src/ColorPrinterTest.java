@@ -101,4 +101,42 @@ class ColorPrinterTest {
     // Assert: Verify the printed output
     assertEquals(expectedOutput, outputStream.toString());
   }
+
+  @Test
+  void testPrintlnWithCyanAnsiAsCyanTextColorWithReset() {
+    // Arrange: Capture the printed output
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(outputStream);
+
+    ColorPrinter printer = new ColorPrinter(printStream);
+    printer.setCurrentColor(ConsoleColor.CYAN);
+
+    // Act: print the emssage
+    String message = "\033[0;36m";
+    printer.println(message, true);
+
+    String expectedOutput = ConsoleColor.CYAN + "\033[0;36m" + System.lineSeparator() + ConsoleColor.RESET;
+
+    // Assert: Verify the printed output
+    assertEquals(expectedOutput, outputStream.toString());
+  }
+
+  @Test
+  void testprintWithOnlySpacesCharactersAsGreen() {
+    // Arrange: Capture the printed output
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(outputStream);
+
+    ColorPrinter printer = new ColorPrinter(printStream);
+    printer.setCurrentColor(ConsoleColor.GREEN);
+
+    // Act: print the emssage
+    String message = "          ";
+    printer.print(message, false);
+
+    String expectedOutput = ConsoleColor.GREEN + "          ";
+
+    // Assert: Verify the printed output
+    assertEquals(expectedOutput, outputStream.toString());
+  }
 }
