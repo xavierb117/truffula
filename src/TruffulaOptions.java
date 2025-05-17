@@ -108,12 +108,16 @@ public class TruffulaOptions  {
 
     boolean hiddenFile = false;
     boolean colors = true;
-    for (String value : args) {
-      if (value.equals("-h")) {
+    for (int i = 0; i < args.length - 1; i++) {
+      if (args[i].equals("-h")) {
         hiddenFile = true;
       }
-      else if (value.equals("-nc")) {
+      else if (args[i].equals("-nc")) {
         colors = false;
+      } else {
+
+
+        throw new IllegalArgumentException("unknown flag: " + args[i]);
       }
     }
 
