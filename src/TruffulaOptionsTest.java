@@ -28,7 +28,7 @@ public class TruffulaOptionsTest {
     assertFalse(options.isUseColor());
   }
 
-    @Test
+  @Test
   void testNoFlags(@TempDir File tempDir) throws FileNotFoundException {
     // Arrange: Prepare the arguments with the temp directory
     File directory = new File(tempDir, "subfolder");
@@ -45,7 +45,7 @@ public class TruffulaOptionsTest {
     assertTrue(options.isUseColor());
   }
 
-   @Test
+  @Test
   void testDirectoryWithHiddenFilesIncluded(@TempDir File tempDir) throws FileNotFoundException {
     // Arrange: Prepare the arguments with the temp directory
     File directory = new File(tempDir, "subfolder");
@@ -62,7 +62,7 @@ public class TruffulaOptionsTest {
     assertTrue(options.isUseColor());
   }
 
-     @Test
+  @Test
   void testDirectoryWithNoColorAndNoHiddenFilesShown(@TempDir File tempDir) throws FileNotFoundException {
     // Arrange: Prepare the arguments with the temp directory
     File directory = new File(tempDir, "subfolder");
@@ -79,7 +79,7 @@ public class TruffulaOptionsTest {
     assertFalse(options.isUseColor());
   }
 
-       @Test
+  @Test
   void testDirectoryBeingFirstArgument(@TempDir File tempDir) throws FileNotFoundException {
     // Arrange: Prepare the arguments with the temp directory
     File directory = new File(tempDir, "subfolder");
@@ -91,16 +91,22 @@ public class TruffulaOptionsTest {
     assertThrows(IllegalArgumentException.class, () -> {
       new TruffulaOptions(args);
     });
-
   }
 
+  @Test
+    void testTheOrderOfFlags(@TempDir File tempDir) throws FileNotFoundException {
+    // Arrange: Prepare the arguments with the temp directory
+    File directory = new File(tempDir, "subfolder");
+    directory.mkdir();
+    String directoryPath = directory.getAbsolutePath();
+    String[] args = {"-h", "-nc", directoryPath};
 
+    // Act: Create TruffulaOptions Instance
+    TruffulaOptions options = new TruffulaOptions(args);
 
-
-
-
-
-
-
-
+    // Assert: Check that the no flags error handling is set correctly
+    assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
+    assertTrue(options.isShowHidden());
+    assertFalse(options.isUseColor());
+  }
 }
