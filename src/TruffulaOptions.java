@@ -114,15 +114,14 @@ public class TruffulaOptions  {
       }
       else if (args[i].equals("-nc")) {
         colors = false;
-      } else {
-
-
-        throw new IllegalArgumentException("unknown flag: " + args[i]);
+      } 
+      else {
+        throw new IllegalArgumentException("Unknown flag: " + args[i]);
       }
     }
 
     File file = null;
-    if (args[args.length - 1] != "-nc" && args[args.length - 1] != "-h") {
+    if (!args[args.length - 1].equals("-nc") && !args[args.length - 1].equals("-h")) {
       file = new File(args[args.length - 1]);
     }
     else {
@@ -133,12 +132,16 @@ public class TruffulaOptions  {
     useColor = colors;
     root = file;
 
+    if (root == null) {
+      throw new IllegalArgumentException("Path is missing");
+    }
+
     if (!root.exists()) {
-      throw new IllegalArgumentException("File does not exist");
+      throw new FileNotFoundException("Could not find directory");
     }
     
     if (!root.isDirectory()) {
-      throw new FileNotFoundException("File is not directory");
+      throw new FileNotFoundException("Path is not directory");
     }
   }
 

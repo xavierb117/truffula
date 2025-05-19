@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -56,7 +57,7 @@ public class TruffulaOptionsTest {
     // Act: Create TruffulaOptions instance
     TruffulaOptions options = new TruffulaOptions(args);
 
-    // Assert: Check that the no flags error handling is set correctly
+    // Assert
     assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
     assertTrue(options.isShowHidden());
     assertTrue(options.isUseColor());
@@ -73,7 +74,7 @@ public class TruffulaOptionsTest {
     // Act: Create TruffulaOptions instance
     TruffulaOptions options = new TruffulaOptions(args);
 
-    // Assert: Check that the no flags error handling is set correctly
+    // Assert
     assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
     assertFalse(options.isShowHidden());
     assertFalse(options.isUseColor());
@@ -87,7 +88,7 @@ public class TruffulaOptionsTest {
     String directoryPath = directory.getAbsolutePath();
     String[] args = {directoryPath, "h"};
 
-    // Assert: Check that the no flags error handling is set correctly
+    // Assert
     assertThrows(IllegalArgumentException.class, () -> {
       new TruffulaOptions(args);
     });
@@ -104,7 +105,7 @@ public class TruffulaOptionsTest {
     // Act: Create TruffulaOptions Instance
     TruffulaOptions options = new TruffulaOptions(args);
 
-    // Assert: Check that the no flags error handling is set correctly
+    // Assert
     assertEquals(directory.getAbsolutePath(), options.getRoot().getAbsolutePath());
     assertTrue(options.isShowHidden());
     assertFalse(options.isUseColor());
@@ -118,7 +119,7 @@ public class TruffulaOptionsTest {
     String directoryPath = directory.getAbsolutePath();
     String[] args = {};
 
-    // Assert: Check that the no flags error handling is set correctly
+    // Assert
     assertThrows(IllegalArgumentException.class, () -> {
       new TruffulaOptions(args);
     });
@@ -132,11 +133,53 @@ public class TruffulaOptionsTest {
     String directoryPath = directory.getAbsolutePath();
     String[] args = {"-hl", "-n", directoryPath};
 
-    // Act: Create TruffulaOptions Instance
-
-    // Assert: Check that the no flags error handling is set correctly
+    // Assert
     assertThrows(IllegalArgumentException.class, () -> {
       new TruffulaOptions(args);
     });
     }
+
+    @Test
+    void testDirectoryWithNoPath(@TempDir File tempDir) throws FileNotFoundException {
+    // Arrange: Prepare the arguments with the temp directory
+    File directory = new File(tempDir, "subfolder");
+    directory.mkdir();
+    String directoryPath = directory.getAbsolutePath();
+    String[] args = {"-nc", "-h"};
+
+    // Assert
+    assertThrows(IllegalArgumentException.class, () -> {
+      new TruffulaOptions(args);
+    });
+    }
+
+    @Test
+    void testWithNonExistentDirectory(@TempDir File tempDir) throws FileNotFoundException {
+    // Arrange: Prepare the arguments with the temp directory
+    File directory = new File(tempDir, "subfolder");
+    String directoryPath = directory.getAbsolutePath();
+    String[] args = {"-nc", "-h", directoryPath};
+
+    // Assert
+    assertThrows(FileNotFoundException.class, () -> {
+      new TruffulaOptions(args);
+    });
+    }
+
+    @Test
+    void testWithPathPointingToFile(@TempDir File tempDir) throws FileNotFoundException {
+    // Arrange: Prepare the arguments with the temp directory
+    try {
+      File directory = new File(tempDir, "subfolder");
+      directory.createNewFile();
+      String[] args = {"-nc", "-h", directory.getAbsolutePath()};
+
+      // Assert
+      assertThrows(FileNotFoundException.class, () -> {
+        new TruffulaOptions(args);
+      });
+    } catch (IOException e) {
+      System.out.println(e);
+    }
+  }
 }
