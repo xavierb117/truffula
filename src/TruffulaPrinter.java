@@ -1,5 +1,7 @@
 import java.io.PrintStream;
 import java.util.List;
+import java.io.File;
+import java.util.ArrayList;
 
 /**
  * TruffulaPrinter is responsible for printing a directory tree structure
@@ -111,8 +113,47 @@ public class TruffulaPrinter {
     // - For Wave 6: Use AlphabeticalFileSorter
     // DO NOT USE SYSTEM.OUT.PRINTLN
     // USE out.println instead (will use your ColorPrinter)
+    File root = options.getRoot();
+    if (root == null || !root.isDirectory()) return;
+
+    printTreeHelper(root, 0, 0);
 
     out.println("printTree was called!");
     out.println("My options are: " + options);
+  }
+
+  public void printTreeHelper(File current, int depth, int color) {
+    // wave 6
+    if (options.isUseColor()) {
+      out.setCurrentColor(colorSequence.get(color));
+    }
+
+    // String indent = "   ".repeat(depth); // Repeats the space for every depth level we go
+    String nameToPrint = current.getName() + (current.isDirectory() ? "/" : "");
+    // if (current.isDirectory()) { 
+    //   out.println("/"); 
+    // } else {
+    //   out.println(""); 
+    // }
+    out.println("   " + nameToPrint);
+    
+    File[] children = current.listFiles();
+    if (children == null) return;
+
+    List<File> filteredLiist = new ArrayList<>();
+    for (File f : children) { // Need loop to check if every file starts with . or not
+      if (options.isShowHidden() && !f.getName().startsWith(".")) {
+        out.println("   " + f.getName());
+      }
+    }
+
+
+    // wave 7
+    AlphabeticalFileSorter.sort(filteredLiist);
+
+    for (File child : children) {
+      printTreeHelper(current, depth + 1, color + 1);
+    }
+
   }
 }
