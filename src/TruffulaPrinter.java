@@ -116,44 +116,88 @@ public class TruffulaPrinter {
     File root = options.getRoot();
     if (root == null || !root.isDirectory()) return;
 
-    printTreeHelper(root, 0, 0);
+    // Wave 4
+    out.println(root.getName() + '/');
 
-    out.println("printTree was called!");
-    out.println("My options are: " + options);
+    printTreeHelper(root, 1, 1);
+
+    // out.println("printTree was called!");
+    // out.println("My options are: " + options);
   }
 
   public void printTreeHelper(File current, int depth, int color) {
-    // wave 6
-    if (options.isUseColor()) {
-      out.setCurrentColor(colorSequence.get(color));
-    }
 
-    // String indent = "   ".repeat(depth); // Repeats the space for every depth level we go
-    String nameToPrint = current.getName() + (current.isDirectory() ? "/" : "");
-    // if (current.isDirectory()) { 
-    //   out.println("/"); 
-    // } else {
-    //   out.println(""); 
-    // }
-    out.println("   " + nameToPrint);
-    
-    File[] children = current.listFiles();
-    if (children == null) return;
+    // Wave 4
+    if (current != null && current.isDirectory()) {
 
-    List<File> filteredLiist = new ArrayList<>();
-    for (File f : children) { // Need loop to check if every file starts with . or not
-      if (options.isShowHidden() && !f.getName().startsWith(".")) {
-        out.println("   " + f.getName());
+      // Wave 7
+      File[] givenFiles = current.listFiles();
+      File[] files = AlphabeticalFileSorter.sort(givenFiles);
+
+      if (files != null) {
+        for (File file : files) {
+          String gap = "";
+
+          // Wave 5
+          if (!options.isShowHidden()) {
+            if (file.getName().charAt(0) != '.') {
+              for (int i = 0; i < depth; i++) {
+                gap = gap + "   ";
+              }
+              
+              // Wave 6
+              if (options.isUseColor()) {
+                if (file.isDirectory()) {
+                  out.setCurrentColor(colorSequence.get(color));
+                  out.println(gap + file.getName() + "/");
+                  int determine = (color + 1) % colorSequence.size();
+                  printTreeHelper(file, depth + 1, determine);
+                }
+                else {
+                  out.setCurrentColor(colorSequence.get(color));
+                  out.println(gap + file.getName());
+                }
+              }
+              else {
+                if (file.isDirectory()) {
+                  out.println(gap + file.getName() + "/");
+                  printTreeHelper(file, depth + 1, 0);
+                }
+                else {
+                  out.println(gap + file.getName());
+                }
+              }
+            }
+          }
+          else {
+            for (int i = 0; i < depth; i++) {
+                gap = gap + "   ";
+            }
+
+            if (options.isUseColor()) {
+              if (file.isDirectory()) {
+                out.setCurrentColor(colorSequence.get(color));
+                out.println(gap + file.getName() + "/");
+                int determine = (color + 1) % colorSequence.size();
+                printTreeHelper(file, depth + 1, determine);
+              }
+              else {
+                out.setCurrentColor(colorSequence.get(color));
+                out.println(gap + file.getName());
+              }
+            }
+            else {
+              if (file.isDirectory()) {
+                out.println(gap + file.getName() + "/");
+                printTreeHelper(file, depth + 1, 0);
+              }
+              else {
+                out.println(gap + file.getName());
+              }
+            }
+          }
+        }
       }
     }
-
-
-    // wave 7
-    AlphabeticalFileSorter.sort(filteredLiist);
-
-    for (File child : children) {
-      printTreeHelper(current, depth + 1, color + 1);
-    }
-
   }
 }
