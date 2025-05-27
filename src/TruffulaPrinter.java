@@ -116,10 +116,16 @@ public class TruffulaPrinter {
     File root = options.getRoot();
     if (root == null || !root.isDirectory()) return;
 
-    // Wave 4
-    out.println(root.getName() + '/');
-
-    printTreeHelper(root, 1, 1);
+    // Wave 4 (and 6)
+    if (options.isUseColor()) {
+      out.setCurrentColor(colorSequence.get(0));
+      out.println(root.getName() + '/');
+      printTreeHelper(root, 1, 1);
+    }
+    else {
+      out.println(root.getName() + '/');
+      printTreeHelper(root, 1, 0);
+    }
 
     // out.println("printTree was called!");
     // out.println("My options are: " + options);
