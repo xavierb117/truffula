@@ -138,6 +138,7 @@ public class TruffulaPrinter {
 
       // Wave 7
       File[] givenFiles = current.listFiles();
+      if (givenFiles == null) return; // no files, nothing to do
       File[] files = AlphabeticalFileSorter.sort(givenFiles);
 
       if (files != null) {
