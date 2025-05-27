@@ -274,4 +274,67 @@ public class TruffulaPrinterTest {
         assertEquals(expected.toString(), "");
         assertEquals(output, expected.toString());
     }
+
+    @Test
+    public void testPrintTree_CaseInsensitiveSorting(@TempDir File tempDir) throws IOException {
+    // Build the example directory structure:
+    // myFolder/
+    //    Apple/
+    //       banana/
+    //          Documents/
+    //    Apple.txt
+    //    Banana.txt
+    //    Dog.txt 
+
+
+        // Create "myFolder"
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir(), "myFolder should be created");
+
+        File apple = new File(myFolder, "Apple");
+        assertTrue(apple.mkdir(), "Apple should be created");
+
+        File banana = new File(apple, "banana");
+        assertTrue(banana.mkdir(), "banana should be created");
+
+        File documents = new File(banana, "Documents");
+        assertTrue(documents.mkdir(), "Documents directory should be created");
+
+        File lower = new File(myFolder, "Apple.txt");
+        File upper = new File(myFolder, "Banana.txt");
+        File title = new File(myFolder, "Dog.txt");
+        lower.createNewFile();
+        upper.createNewFile();
+        title.createNewFile();
+
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, true);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+
+        // Call printTree (output goes to printStream)
+        printer.printTree();
+
+        // Retrieve printed output
+        String output = baos.toString();
+        String nl = System.lineSeparator();
+        ConsoleColor reset = ConsoleColor.RESET;
+        ConsoleColor white = ConsoleColor.WHITE;
+        ConsoleColor purple = ConsoleColor.PURPLE;
+        ConsoleColor yellow = ConsoleColor.YELLOW;
+
+        // Assert that the output matches the expected output exactly
+        StringBuilder expected = new StringBuilder();
+        expected.append(white).append("myFolder/").append(nl).append(reset);
+        expected.append(purple).append("   Apple/").append(nl).append(reset);
+        expected.append(yellow).append("      banana/").append(nl).append(reset);
+        expected.append(white).append("         Documents/").append(nl).append(reset);
+        expected.append(purple).append("   Apple.txt").append(nl).append(reset);
+        expected.append(purple).append("   Banana.txt").append(nl).append(reset);
+        expected.append(purple).append("   Dog.txt").append(nl).append(reset);
+
+        assertEquals(expected.toString(), output);
+    }
+
 }
