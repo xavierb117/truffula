@@ -562,4 +562,127 @@ public class TruffulaPrinterTest {
         // Assert that the output matches the expected output exactly
         assertEquals(expected.toString(), output);
     }
+
+    @Test
+    public void testPrintTree_CaseInsensitiveSorting(@TempDir File tempDir) throws IOException {
+    // Build the example directory structure:
+    // myFolder/
+    //    Apple/
+    //       banana/
+    //          Documents/
+    //    Apple.txt
+    //    Banana.txt
+    //    Dog.txt 
+
+
+        // Create "myFolder"
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir(), "myFolder should be created");
+
+        File apple = new File(myFolder, "Apple");
+        assertTrue(apple.mkdir(), "Apple should be created");
+
+        File banana = new File(apple, "banana");
+        assertTrue(banana.mkdir(), "banana should be created");
+
+        File documents = new File(banana, "Documents");
+        assertTrue(documents.mkdir(), "Documents directory should be created");
+
+        File lower = new File(myFolder, "Apple.txt");
+        File upper = new File(myFolder, "Banana.txt");
+        File title = new File(myFolder, "Dog.txt");
+        lower.createNewFile();
+        upper.createNewFile();
+        title.createNewFile();
+
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, true);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+
+        // Call printTree (output goes to printStream)
+        printer.printTree();
+
+        // Retrieve printed output
+        String output = baos.toString();
+        String nl = System.lineSeparator();
+        ConsoleColor reset = ConsoleColor.RESET;
+        ConsoleColor white = ConsoleColor.WHITE;
+        ConsoleColor purple = ConsoleColor.PURPLE;
+        ConsoleColor yellow = ConsoleColor.YELLOW;
+
+        // Assert that the output matches the expected output exactly
+        StringBuilder expected = new StringBuilder();
+        expected.append(white).append("myFolder/").append(nl).append(reset);
+        expected.append(purple).append("   Apple/").append(nl).append(reset);
+        expected.append(yellow).append("      banana/").append(nl).append(reset);
+        expected.append(white).append("         Documents/").append(nl).append(reset);
+        expected.append(purple).append("   Apple.txt").append(nl).append(reset);
+        expected.append(purple).append("   Banana.txt").append(nl).append(reset);
+        expected.append(purple).append("   Dog.txt").append(nl).append(reset);
+
+        assertEquals(expected.toString(), output);
+    }
+
+        @Test
+    public void testPrintTree_CaseInsensitiveSortingWithSpecialNames(@TempDir File tempDir) throws IOException {
+    // Build the example directory structure:
+    // myFolder/
+    //    _Notes/
+    //    Peter.txt
+    //    Keyboard.txt
+    //    screen/
+    //    Mouse.txt
+
+
+
+        // Create "myFolder"
+        File myFolder = new File(tempDir, "myFolder");
+        assertTrue(myFolder.mkdir(), "myFolder should be created");
+
+        File notes = new File(myFolder, "_Notes");
+        assertTrue(notes.mkdir(), "_Notes should be created");
+
+        File screen = new File(myFolder, "screen");
+        assertTrue(screen.mkdir(), "screen should be created");
+
+        File peter = new File(myFolder, "Peter.txt");
+        File keyboard = new File(myFolder, "Keyboard.txt");
+        File mouse = new File(myFolder, "Mouse.txt");
+        peter.createNewFile();
+        keyboard.createNewFile();
+        mouse.createNewFile();
+
+        TruffulaOptions options = new TruffulaOptions(myFolder, false, true);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(baos);
+        TruffulaPrinter printer = new TruffulaPrinter(options, printStream);
+
+        // Call printTree (output goes to printStream)
+        printer.printTree();
+
+        // Retrieve printed output
+        String output = baos.toString();
+        String nl = System.lineSeparator();
+        ConsoleColor reset = ConsoleColor.RESET;
+        ConsoleColor white = ConsoleColor.WHITE;
+        ConsoleColor purple = ConsoleColor.PURPLE;
+        ConsoleColor yellow = ConsoleColor.YELLOW;
+
+        // Assert that the output matches the expected output exactly
+        StringBuilder expected = new StringBuilder();
+        expected.append(white).append("myFolder/").append(nl).append(reset);
+        expected.append(purple).append("   _Notes/").append(nl).append(reset);
+        expected.append(purple).append("   Keyboard.txt").append(nl).append(reset);
+        expected.append(purple).append("   Mouse.txt").append(nl).append(reset);
+        expected.append(purple).append("   Peter.txt").append(nl).append(reset);
+        expected.append(purple).append("   screen/").append(nl).append(reset);
+
+
+
+        assertEquals(expected.toString(), output);
+    }
+
 }
